@@ -42,6 +42,18 @@ const Slidebar = () => {
     
   }
 
+  function whatsappbutton() {
+    window.open("https://wa.me/9811046503", "_blank");
+  }
+
+  function linkedinbutton() {
+    window.open("https://www.linkedin.com/in/pratik-majhi-743016263/", "_blank");
+  }
+
+  function mailbutton() {
+    window.open("mailto:pratikmajhi9876@gmail.com", "_blank");
+  }
+
   const items = [
     {
       key: 'dashboard',
@@ -64,10 +76,10 @@ const Slidebar = () => {
       label: <Link to="Contact/">Contact</Link>,
       icon: <PhoneOutlined />,
       children: [
-        { key: '1', label: 'Whatsapp', icon:<WhatsAppOutlined/> },
+        { key: '1', label: <button onClick={whatsappbutton}>WhatsApp</button>, icon:<WhatsAppOutlined/> },
         { key: '2', label: <button onClick ={facebookbutton}>Facebook</button>, icon:<FacebookOutlined/> },
-        { key: '3', label: <Link to="https://www.linkedin.com/in/pratik-majhi-743016263/>">Linkedin</Link>, icon:<LinkedinOutlined/> },
-        { key: '4', label: <Link to="https://pratikmajhi9876@gmail.com" >Mail</Link> , icon:<MailOutlined/> },
+        { key: '3', label: <button onClick={linkedinbutton} >Linkedin</button>, icon:<LinkedinOutlined/> },
+        { key: '4', label: <button onClick={mailbutton}>Mail</button>, icon:<MailOutlined/> },
       ],
       
     },
