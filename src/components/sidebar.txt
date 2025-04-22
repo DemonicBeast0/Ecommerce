@@ -1,0 +1,117 @@
+import React, { useState } from "react";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { Link } from "react";
+import items from '../pages/Contact';
+import {
+  HomeOutlined,
+  DatabaseOutlined,
+  PhoneOutlined,
+  InfoOutlined,
+  ProductOutlined,
+  DashboardOutlined,
+} from "@ant-design/icons";
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home";
+import Contact from "../pages/Contact";
+import Data from "../pages/DataTable";
+import About from "../pages/About";
+import Product from "../pages/Product";
+import { Menu } from "antd";
+
+import { Switch, Button } from "antd";
+
+const Slidebar = () => {
+  const [theme, setTheme] = useState("dark");
+  const [current, setCurrent] = useState("1");
+  const [collapsed, setCollapsed] = useState(false);
+
+  const changeTheme = (value) => {
+    setTheme(value ? "dark" : "light");
+  };
+
+  const onClick = (e) => {
+    console.log("click ", e);
+    setCurrent(e.key);
+  };
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+  const items = [
+    {
+      key: "dashboard",
+      label: <Link to="/">Dashboard</Link>,
+      icon: <DashboardOutlined />,
+    },
+    {
+      key: "sub1",
+      label: <Link to="/">Home</Link>,
+      icon: <HomeOutlined />,
+      Link: "Home/",
+    },
+    {
+      key: "data",
+      label: <Link to="DataTable/">Data Table</Link>,
+      icon: <DatabaseOutlined />,
+    },
+    {
+      key: "sub3",
+      label: <Link to="Contact/">Contact</Link>,
+      icon: <PhoneOutlined />,
+    },
+    {
+      key: "Product",
+      label: <Link to="product/">Product</Link>,
+      icon: <ProductOutlined />,
+    },
+    {
+      key: "About",
+      label: <Link to="About/">About</Link>,
+      icon: <InfoOutlined />,
+    },
+  ];
+
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: 10,
+          padding: "1 8px 8px 8px",
+        }}
+      ></div>
+
+      <Menu
+        theme={theme}
+        onClick={onClick}
+        style={{ width: 200 }}
+        defaultOpenKeys={["sub1"]}
+        selectedKeys={[current]}
+        mode="inline"
+        inlineCollapsed={collapsed}
+        items={items}
+      />
+
+      <Button type="primary" onClick={toggleCollapsed}>
+        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </Button>
+      <Switch
+        checked={theme === "dark"}
+        onChange={changeTheme}
+        checkedChildren="Dark"
+        unCheckedChildren="Light"
+      />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/Data" element={<Data />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/product" element={<Product />} />
+      </Routes>
+    </>
+  );
+};
+
+export default Slidebar;

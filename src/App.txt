@@ -1,0 +1,121 @@
+import React, { useState } from 'react';
+import './App.css';
+import Counter from './test';
+import Render from './name_render';
+
+function App() {
+  const [count, setCount] = useState(0);
+  const [randomNumber, setRandomNumber] = useState(0);
+  const [arr, setArr] = useState([]);
+  const [input, setInput] = useState("");
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  const spin = () => {
+    const randomValue = Math.floor(Math.random() * 100) + 1;
+    setRandomNumber(randomValue);
+  };
+
+  // Function to add names to the friends list
+  const arr_set = () => {
+    if (input!== "") {
+      setArr([...arr, { name: input}]);
+      // setArr([...arr, { name: input, age: Math.floor(Math.random() * 50) + 10 }]); // Add random age
+      setInput("");
+    }
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Counter />
+        <p>
+          Counter: <span>{count}</span>
+        </p>
+
+        <div>
+          <button onClick={increment}>Increment</button>
+          <button onClick={decrement}>Decrement</button>
+        </div>
+
+        <div style={{ marginTop: '20px' }}>
+          <p>Random Spin Box</p>
+          <div className="spin-box">
+            <p>{randomNumber}</p>
+          </div>
+          <button onClick={spin}>Spin</button>
+        </div>
+        <Render/>
+        {/* Friends List */}
+        <div style={{ marginTop: '20px' }}>
+          <p>Friends:</p>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Enter a name"
+          />
+
+          <button onClick={arr_set}>Add</button>
+
+          <ul>
+            {arr.map((friend, index) => (
+              <li key={index}>
+                {friend.name}
+                {/* {friend.name} - {friend.age} years old */}
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
+// {
+//   title: "Nation",
+//   dataIndex: "Nation",
+//   key: "Nation",
+// },
+// {
+// title: "Year",
+// dataIndex: "Year",
+// key: "Year",
+// sorter: (a, b) => a.Year - b.Year,
+// filters: data.map(item => ({ text: item.Year.toString(), value: item.Year })),
+// onFilter: (value, record) => record.Year === value,
+// },
+// {
+// title: "Population",
+// dataIndex: "Population",
+// key: "Population",
+// sorter: (a, b) => a.Population - b.Population,
+// },
+
+// import { useEffect, useState } from "react";
+// import { Watermark } from "antd";
+// import { Table } from "antd";
+// import React from "react";
+
+
+// import React from 'react';
+// import { Routes, Route } from 'react-router-dom';
+// import Sidebar from './components/Sidebar';
+
+// import {  DatabaseOutlined, FacebookOutlined, HomeOutlined, InfoOutlined, LinkOutlined, MailOutlined, PhoneOutlined, WhatsAppOutlined} from '@ant-design/icons';
+
+// children: [
+//       { key: '1', label: 'WhatsApp', icon: <WhatsAppOutlined /> },
+//       { key: '2', label: 'Mail', icon: <MailOutlined /> },
+//       { key: '3', label: 'Linkedin', icon: <LinkOutlined /> },
+//       { key: '4', label: 'Facebook', icon: <FacebookOutlined /> },
+//     ],
